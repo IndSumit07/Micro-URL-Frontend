@@ -10,8 +10,16 @@ const Hero = () => {
       <div className="bg-shader"></div>
       <div className="blob blob-1"></div>
       <div className="blob blob-2"></div>
-      <div className="poly-left"></div>
-      <div className="poly-right"></div>
+      {/* Background SVG Geometrics (Matches Image exactly) */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        {/* Left Side Geometrics */}
+        <div className="absolute top-[15%] -left-[500px] md:-left-[400px] lg:-left-[350px] w-[650px] h-[650px] bg-gradient-to-br from-[#000000] to-[#ff0033]/20 border-r-[3px] border-b-[3px] border-[#ff0033]/30 rounded-[32px] rotate-45 opacity-70" />
+        <div className="absolute top-[25%] -left-[450px] md:-left-[350px] lg:-left-[300px] w-[550px] h-[550px] bg-gradient-to-br from-[#0a0000] via-[#220005] to-[#ff0033] border-r-[4px] border-b-[4px] border-[#ff0033] shadow-[0_0_150px_rgba(255,0,51,0.5),inset_0_0_50px_rgba(255,0,51,0.3)] rounded-[32px] rotate-45 opacity-100" />
+
+        {/* Right Side Geometrics */}
+        <div className="absolute top-[15%] -right-[500px] md:-right-[400px] lg:-right-[350px] w-[650px] h-[650px] bg-gradient-to-tl from-[#000000] to-[#ff0033]/20 border-t-[3px] border-l-[3px] border-[#ff0033]/30 rounded-[32px] rotate-45 opacity-70" />
+        <div className="absolute top-[25%] -right-[450px] md:-right-[350px] lg:-right-[300px] w-[550px] h-[550px] bg-gradient-to-tl from-[#0a0000] via-[#220005] to-[#ff0033] border-t-[4px] border-l-[4px] border-[#ff0033] shadow-[0_0_150px_rgba(255,0,51,0.5),inset_0_0_50px_rgba(255,0,51,0.3)] rounded-[32px] rotate-45 opacity-100" />
+      </div>
 
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
@@ -56,8 +64,11 @@ const Hero = () => {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.4, type: "spring", stiffness: 50 }}
-        className="w-full relative z-10 pb-20"
+        className="w-full relative z-10 pb-20 flex justify-center"
       >
+        {/* Deep red ambient glow behind the dashboard */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-[1100px] h-[500px] bg-gradient-to-b from-[#ff0033]/40 via-[#ff0033]/5 to-transparent blur-[100px] -z-10" />
+        
         <DashboardMockup />
       </motion.div>
 
