@@ -8,6 +8,7 @@ import {
 import { Toaster } from "react-hot-toast";
 
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 import Navbar from "./components/Navbar";
@@ -78,27 +79,29 @@ const AppContent = () => {
 
 const App = () => (
   <Router>
-    <AuthProvider>
-      <AppContent />
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: "#111",
-            color: "#fff",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "12px",
-            fontSize: "14px",
-          },
-          success: {
-            iconTheme: { primary: "#ff0033", secondary: "#fff" },
-          },
-          error: {
-            iconTheme: { primary: "#ff4444", secondary: "#fff" },
-          },
-        }}
-      />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "var(--surface-secondary)",
+              color: "var(--text-main)",
+              border: "1px solid var(--border-secondary)",
+              borderRadius: "12px",
+              fontSize: "14px",
+            },
+            success: {
+              iconTheme: { primary: "#ff0033", secondary: "#fff" },
+            },
+            error: {
+              iconTheme: { primary: "#ff4444", secondary: "#fff" },
+            },
+          }}
+        />
+      </AuthProvider>
+    </ThemeProvider>
   </Router>
 );
 

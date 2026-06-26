@@ -22,8 +22,8 @@ const Login = () => {
     <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
       {/* Background Geometrics */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <div className="absolute top-[10%] -left-[300px] w-[600px] h-[600px] bg-gradient-to-br from-[#0a0000] via-[#220005] to-[#ff0033] border-r-[4px] border-b-[4px] border-[#ff0033] shadow-[0_0_150px_rgba(255,0,51,0.3),inset_0_0_50px_rgba(255,0,51,0.2)] rounded-[32px] rotate-45 opacity-50" />
-        <div className="absolute bottom-[10%] -right-[300px] w-[600px] h-[600px] bg-gradient-to-tl from-[#0a0000] via-[#220005] to-[#ff0033] border-t-[4px] border-l-[4px] border-[#ff0033] shadow-[0_0_150px_rgba(255,0,51,0.3),inset_0_0_50px_rgba(255,0,51,0.2)] rounded-[32px] rotate-45 opacity-50" />
+        <div className="absolute top-[10%] -left-[300px] w-[600px] h-[600px] geom-shape-2 geom-border-2 geom-shadow rounded-[32px] rotate-45 opacity-50" />
+        <div className="absolute bottom-[10%] -right-[300px] w-[600px] h-[600px] geom-shape-4 geom-border-4 geom-shadow rounded-[32px] rotate-45 opacity-50" />
       </div>
 
       <motion.div

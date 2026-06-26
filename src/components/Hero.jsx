@@ -13,12 +13,12 @@ const Hero = () => {
       {/* Background SVG Geometrics (Matches Image exactly) */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         {/* Left Side Geometrics */}
-        <div className="absolute top-[15%] -left-[500px] md:-left-[400px] lg:-left-[350px] w-[650px] h-[650px] bg-gradient-to-br from-[#000000] to-[#ff0033]/20 border-r-[3px] border-b-[3px] border-[#ff0033]/30 rounded-[32px] rotate-45 opacity-70" />
-        <div className="absolute top-[25%] -left-[450px] md:-left-[350px] lg:-left-[300px] w-[550px] h-[550px] bg-gradient-to-br from-[#0a0000] via-[#220005] to-[#ff0033] border-r-[4px] border-b-[4px] border-[#ff0033] shadow-[0_0_150px_rgba(255,0,51,0.5),inset_0_0_50px_rgba(255,0,51,0.3)] rounded-[32px] rotate-45 opacity-100" />
+        <div className="absolute top-[15%] -left-[500px] md:-left-[400px] lg:-left-[350px] w-[650px] h-[650px] geom-shape-1 geom-border-1 rounded-[32px] rotate-45 opacity-70" />
+        <div className="absolute top-[25%] -left-[450px] md:-left-[350px] lg:-left-[300px] w-[550px] h-[550px] geom-shape-2 geom-border-2 geom-shadow rounded-[32px] rotate-45 opacity-100" />
 
         {/* Right Side Geometrics */}
-        <div className="absolute top-[15%] -right-[500px] md:-right-[400px] lg:-right-[350px] w-[650px] h-[650px] bg-gradient-to-tl from-[#000000] to-[#ff0033]/20 border-t-[3px] border-l-[3px] border-[#ff0033]/30 rounded-[32px] rotate-45 opacity-70" />
-        <div className="absolute top-[25%] -right-[450px] md:-right-[350px] lg:-right-[300px] w-[550px] h-[550px] bg-gradient-to-tl from-[#0a0000] via-[#220005] to-[#ff0033] border-t-[4px] border-l-[4px] border-[#ff0033] shadow-[0_0_150px_rgba(255,0,51,0.5),inset_0_0_50px_rgba(255,0,51,0.3)] rounded-[32px] rotate-45 opacity-100" />
+        <div className="absolute top-[15%] -right-[500px] md:-right-[400px] lg:-right-[350px] w-[650px] h-[650px] geom-shape-3 geom-border-3 rounded-[32px] rotate-45 opacity-70" />
+        <div className="absolute top-[25%] -right-[450px] md:-right-[350px] lg:-right-[300px] w-[550px] h-[550px] geom-shape-4 geom-border-4 geom-shadow rounded-[32px] rotate-45 opacity-100" />
       </div>
 
       <motion.div 

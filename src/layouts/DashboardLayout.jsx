@@ -11,9 +11,13 @@ import {
   LogOut,
   ChevronDown,
   User,
+  Sun,
+  Moon,
+  Triangle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
 const navItems = [
   { icon: Home, path: "/dashboard", label: "Overview" },
@@ -24,6 +28,7 @@ const navItems = [
 
 export default function DashboardLayout() {
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -41,9 +46,13 @@ export default function DashboardLayout() {
         {/* Logo */}
         <div className="h-20 flex items-center justify-center lg:justify-start lg:px-8 border-b border-white/5">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-[#80001a] flex items-center justify-center shadow-[0_0_15px_rgba(255,0,51,0.5)]">
-              <span className="font-bold text-white text-lg">X</span>
-            </div>
+            <motion.div 
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="text-white shrink-0"
+            >
+              <Triangle className="w-6 h-6 fill-white" />
+            </motion.div>
             <span className="font-bold text-xl tracking-tight hidden lg:block">
               Micro
             </span>
@@ -168,6 +177,25 @@ export default function DashboardLayout() {
             <button className="p-2 rounded-full border border-white/5 hover:bg-white/5 hover:text-white text-gray-400 transition-colors relative">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full shadow-[0_0_6px_rgba(255,0,51,0.8)]" />
+            </button>
+
+            {/* Theme Toggle */}
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-full border border-white/5 hover:bg-white/5 hover:text-white text-gray-400 transition-colors flex items-center justify-center overflow-hidden w-9 h-9"
+              title="Toggle Theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={theme}
+                  initial={{ y: -10, opacity: 0, rotate: 45 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={{ y: 10, opacity: 0, rotate: -45 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </motion.div>
+              </AnimatePresence>
             </button>
 
             {/* Avatar */}

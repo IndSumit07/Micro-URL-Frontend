@@ -17,7 +17,7 @@ export async function getLinkAnalytics(linkId, { period = "7d" } = {}) {
 }
 
 /** Fetch overall analytics summary for the authenticated user */
-export async function getUserAnalytics({ days = 7 } = {}) {
-  const { data } = await axiosClient.get(`${BASE}/overview`, { params: { days } });
+export async function getUserAnalytics({ days = 7, linkIds = "" } = {}) {
+  const { data } = await axiosClient.get(`${BASE}/overview`, { params: { days, linkIds } });
   return data.data;
 }

@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link2, Sparkles, Calendar, Tag, ChevronDown, Check, Copy } from "lucide-react";
 
 /**
- * CreateLinkForm — modal-style form to shorten a URL.
- * Now features a luxurious success state after creation.
+ * CreateLinkForm — modal-style or inline-style form to shorten a URL.
+ * Now features an inline mode option for sidebars.
  */
-export default function CreateLinkForm({ onSubmit, creating, onClose }) {
+export default function CreateLinkForm({ onSubmit, creating, onClose, isInline = false }) {
   const [form, setForm] = useState({
     longUrl: "",
     title: "",
@@ -63,10 +63,10 @@ export default function CreateLinkForm({ onSubmit, creating, onClose }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.96, y: -10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 shadow-2xl relative overflow-hidden"
+      initial={isInline ? {} : { opacity: 0, scale: 0.96, y: -10 }}
+      animate={isInline ? {} : { opacity: 1, scale: 1, y: 0 }}
+      exit={isInline ? {} : { opacity: 0, scale: 0.96 }}
+      className={`${isInline ? 'w-full bg-[#111]/30 hover:bg-[#111]/45 border border-white/5 rounded-2xl p-6 shadow-xl relative overflow-hidden transition-colors' : 'bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 shadow-2xl relative overflow-hidden'}`}
     >
       <AnimatePresence mode="wait">
         {successLink ? (
@@ -86,30 +86,32 @@ export default function CreateLinkForm({ onSubmit, creating, onClose }) {
             </p>
             
             <div className="w-full bg-[#111] border border-white/10 rounded-xl p-1 pl-4 flex items-center justify-between mb-8 shadow-inner group">
-              <span className="text-primary font-medium truncate pr-4">
+              <span className="text-primary font-medium truncate pr-4 text-xs">
                 {successLink.short_url.replace(/^https?:\/\//, "")}
               </span>
               <button
                 onClick={handleCopy}
-                className="bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-lg px-4 py-2 text-sm font-medium transition-colors flex items-center gap-2 shrink-0 group-hover:border-primary/50 group-hover:text-primary group-hover:bg-primary/10"
+                className="bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-lg px-3 py-1.5 text-xs font-medium transition-colors flex items-center gap-2 shrink-0 group-hover:border-primary/50 group-hover:text-primary group-hover:bg-primary/10"
               >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? "Copied!" : "Copy Link"}
+                {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? "Copied!" : "Copy"}
               </button>
             </div>
 
             <div className="flex gap-3 w-full">
-              <button
-                type="button"
-                onClick={onClose}
-                className="flex-1 py-3 rounded-xl border border-white/10 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
-              >
-                Done
-              </button>
+              {!isInline && (
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex-1 py-3 rounded-xl border border-white/10 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+                >
+                  Done
+                </button>
+              )}
               <button
                 type="button"
                 onClick={resetForm}
-                className="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-xl py-3 text-sm transition-all"
+                className={`${isInline ? 'w-full' : 'flex-1'} bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-xl py-3 text-sm transition-all`}
               >
                 Shorten Another
               </button>
@@ -118,24 +120,26 @@ export default function CreateLinkForm({ onSubmit, creating, onClose }) {
         ) : (
           <motion.div
             key="form"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
+            initial={isInline ? {} : { opacity: 0, x: -20 }}
+            animate={isInline ? {} : { opacity: 1, x: 0 }}
+            exit={isInline ? {} : { opacity: 0, x: 20 }}
           >
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-lg font-semibold text-white">New Short Link</h3>
+                <h3 className="text-lg font-semibold text-white">Shorten URL</h3>
                 <p className="text-xs text-gray-400 mt-0.5">
                   Paste your long URL and we'll make it tiny.
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="text-gray-500 hover:text-white transition-colors text-2xl leading-none"
-              >
-                ×
-              </button>
+              {!isInline && (
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="text-gray-500 hover:text-white transition-colors text-2xl leading-none"
+                >
+                  ×
+                </button>
+              )}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -148,7 +152,7 @@ export default function CreateLinkForm({ onSubmit, creating, onClose }) {
                   value={form.longUrl}
                   onChange={set("longUrl")}
                   required
-                  placeholder="https://your-very-long-url.com/goes/here"
+                  placeholder="https://your-long-url.com"
                   className={inputClass}
                 />
               </div>
@@ -157,7 +161,7 @@ export default function CreateLinkForm({ onSubmit, creating, onClose }) {
               <button
                 type="button"
                 onClick={() => setShowAdvanced((v) => !v)}
-                className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform ${showAdvanced ? "rotate-180" : ""}`}
@@ -213,17 +217,19 @@ export default function CreateLinkForm({ onSubmit, creating, onClose }) {
 
               {/* Submit */}
               <div className="flex gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
-                >
-                  Cancel
-                </button>
+                {!isInline && (
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="flex-1 py-3 rounded-xl border border-white/10 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+                  >
+                    Cancel
+                  </button>
+                )}
                 <button
                   type="submit"
                   disabled={creating || !form.longUrl.trim()}
-                  className="flex-1 bg-gradient-to-r from-primary to-[#cc0022] hover:from-[#ff1a4b] hover:to-primary text-white font-medium rounded-xl py-3 text-sm transition-all shadow-[0_0_20px_rgba(255,0,51,0.3)] hover:shadow-[0_0_30px_rgba(255,0,51,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className={`${isInline ? 'w-full' : 'flex-1'} bg-gradient-to-r from-primary to-[#cc0022] hover:from-[#ff1a4b] hover:to-primary text-white font-semibold rounded-xl py-3 text-sm transition-all shadow-[0_0_20px_rgba(255,0,51,0.3)] hover:shadow-[0_0_30px_rgba(255,0,51,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2`}
                 >
                   {creating ? (
                     <>

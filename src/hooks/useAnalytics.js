@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { getUserAnalytics } from "../api/analytics.api";
 import { useAuth } from "../context/AuthContext";
 
-export function useAnalytics(days = 7) {
+export function useAnalytics(days = 7, selectedLinkIds = []) {
   const { user } = useAuth();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const selectedLinkIdsStr = selectedLinkIds && selectedLinkIds.length > 0 ? selectedLinkIds.join(",") : "";
 
   useEffect(() => {
     if (!user) return;
@@ -15,7 +17,7 @@ export function useAnalytics(days = 7) {
     async function fetchAnalytics() {
       try {
         setLoading(true);
-        const stats = await getUserAnalytics({ days });
+        const stats = await getUserAnalytics({ days, linkIds: selectedLinkIdsStr });
         if (isMounted) {
           setData(stats);
         }
@@ -31,7 +33,7 @@ export function useAnalytics(days = 7) {
     return () => {
       isMounted = false;
     };
-  }, [user, days]);
+  }, [user, days, selectedLinkIdsStr]);
 
   return { data, loading };
 }
