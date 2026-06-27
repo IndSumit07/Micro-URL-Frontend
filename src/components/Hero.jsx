@@ -1,9 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import DashboardMockup from './DashboardMockup';
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
   return (
     <div className="relative min-h-screen pt-40 px-6 overflow-hidden flex flex-col items-center">
       {/* Background elements */}
@@ -53,7 +58,10 @@ const Hero = () => {
         </p>
 
         {/* CTA */}
-        <button className="hero-button rounded-full px-8 py-3.5 flex items-center space-x-3 text-sm font-medium text-white group cursor-pointer">
+        <button 
+          onClick={() => navigate(isAuthenticated ? '/dashboard' : '/login')}
+          className="hero-button rounded-full px-8 py-3.5 flex items-center space-x-3 text-sm font-medium text-white group cursor-pointer"
+        >
           <span>Start Shortening Links</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-white/70 group-hover:text-white" />
         </button>

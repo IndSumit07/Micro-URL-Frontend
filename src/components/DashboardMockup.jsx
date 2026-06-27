@@ -70,7 +70,7 @@ const DashboardMockup = () => {
                 <div className="bg-white/5 border border-white/5 rounded-2xl p-5 hover:bg-white/10 transition-colors cursor-pointer">
                   <div className="flex justify-between items-start mb-4">
                     <span className="text-xs text-muted">Active Links</span>
-                    <span className="text-[10px] text-green-400 bg-green-400/10 px-2 py-1 rounded-full flex items-center">14% ↗</span>
+                    <span className="text-[10px] text-green-400 bg-green-400/10 px-2 py-1 rounded-full flex items-center">14%</span>
                   </div>
                   <div className="flex items-end space-x-2">
                     <span className="text-2xl font-semibold text-white">245</span>
@@ -81,7 +81,7 @@ const DashboardMockup = () => {
                 <div className="bg-white/5 border border-white/5 rounded-2xl p-5 hover:bg-white/10 transition-colors cursor-pointer">
                   <div className="flex justify-between items-start mb-4">
                     <span className="text-xs text-muted">Total Clicks</span>
-                    <span className="text-[10px] text-green-400 bg-green-400/10 px-2 py-1 rounded-full flex items-center">28% ↗</span>
+                    <span className="text-[10px] text-green-400 bg-green-400/10 px-2 py-1 rounded-full flex items-center">28%</span>
                   </div>
                   <div className="flex items-end space-x-2">
                     <span className="text-2xl font-semibold text-white">4.2M</span>

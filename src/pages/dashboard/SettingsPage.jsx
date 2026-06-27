@@ -4,7 +4,7 @@ import { User, Mail, Shield, LogOut, Trash2, Save } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsPage() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateUser } = useAuth();
 
   const [displayName, setDisplayName] = useState(
     user?.user_metadata?.full_name ?? ""
@@ -13,11 +13,31 @@ export default function SettingsPage() {
 
   const email = user?.email ?? "";
 
-  const handleSave = (e) => {
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordSaved, setPasswordSaved] = useState(false);
+
+  const handleSave = async (e) => {
     e.preventDefault();
-    // TODO: call supabase.auth.updateUser({ data: { full_name: displayName } })
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    try {
+      await updateUser({ data: { full_name: displayName } });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handlePasswordSave = async (e) => {
+    e.preventDefault();
+    if (!newPassword) return;
+    try {
+      await updateUser({ password: newPassword });
+      setNewPassword("");
+      setPasswordSaved(true);
+      setTimeout(() => setPasswordSaved(false), 2000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const inputClass =
@@ -96,25 +116,32 @@ export default function SettingsPage() {
           <h3 className="font-semibold text-white">Security</h3>
         </div>
 
-        <div className="flex items-center justify-between py-2">
-          <div>
-            <p className="text-sm text-white font-medium">Password</p>
-            <p className="text-xs text-gray-500 mt-0.5">
-              Managed by Supabase Auth.
-            </p>
+        <form onSubmit={handlePasswordSave} className="space-y-4">
+          <div className="space-y-1.5 py-2">
+            <div>
+              <p className="text-sm text-white font-medium">Change Password</p>
+              <p className="text-xs text-gray-500 mt-0.5 mb-3">
+                If you logged in with Google, you can set a password here to login with email later.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="New password"
+                className="flex-1 bg-black/50 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              />
+              <button
+                type="submit"
+                disabled={!newPassword}
+                className="bg-white/5 hover:bg-white/10 text-white font-medium rounded-xl py-2.5 px-4 text-sm transition-all border border-white/10 disabled:opacity-50"
+              >
+                {passwordSaved ? "Updated!" : "Update"}
+              </button>
+            </div>
           </div>
-          <button
-            onClick={() =>
-              window.open(
-                `${import.meta.env.VITE_SUPABASE_URL}/auth/v1/recover`,
-                "_blank"
-              )
-            }
-            className="text-sm text-primary hover:underline"
-          >
-            Reset
-          </button>
-        </div>
+        </form>
       </section>
 
       {/* Danger Zone */}

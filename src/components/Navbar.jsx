@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { User, Triangle, Sun, Moon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { isAuthenticated } = useAuth();
   return (
     <motion.nav 
       initial={{ opacity: 0, y: -20 }}
@@ -48,7 +50,7 @@ const Navbar = () => {
             </motion.div>
           </AnimatePresence>
         </button>
-        <Link to="/login">
+        <Link to={isAuthenticated ? "/dashboard" : "/login"}>
           <button className="p-2 rounded-full border border-white/10 hover:border-white/30 transition-all bg-white/5 backdrop-blur-md cursor-pointer hover:bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.05)] hover:shadow-[0_0_15px_rgba(255,0,51,0.2)]">
             <User className="w-4 h-4 text-white" />
           </button>

@@ -110,6 +110,15 @@ export function AuthProvider({ children }) {
     return data.session?.access_token ?? null;
   }, []);
 
+  // ── Update User ───────────────────────────────────────────────────────────
+  const updateUser = useCallback(async (attributes) => {
+    const { data, error } = await supabase.auth.updateUser(attributes);
+    if (error) throw error;
+    setUser(data.user);
+    toast.success("Profile updated successfully!");
+    return data;
+  }, []);
+
   const value = {
     user,
     session,
@@ -120,6 +129,7 @@ export function AuthProvider({ children }) {
     signInWithGoogle,
     signOut,
     getAccessToken,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
