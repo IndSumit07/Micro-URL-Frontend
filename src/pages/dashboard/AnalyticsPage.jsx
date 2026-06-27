@@ -12,9 +12,10 @@ export default function AnalyticsPage() {
   
   const { data: analytics, loading: analyticsLoading } = useAnalytics(days, selectedLinkIds);
 
-  const totalClicks = analytics?.totalClicks ?? 0;
+  const totalClicks    = analytics?.totalClicks    ?? 0;
   const uniqueVisitors = analytics?.uniqueVisitors ?? 0;
-  const topLink = analytics?.topLink ?? "None";
+  const topLink        = analytics?.topLink        ?? "None";
+  const avgRedirectMs  = analytics?.avgRedirectMs  ?? null;
   const timeSeries = analytics?.timeSeries || Array.from({ length: days }).map((_, i) => {
     const d = new Date();
     d.setDate(d.getDate() - (days - 1 - i));
@@ -22,10 +23,17 @@ export default function AnalyticsPage() {
   });
   const maxClicks = Math.max(...timeSeries.map((d) => d.clicks), 10);
 
+  // Format the avg redirect speed display
+  const avgRedirectDisplay = analyticsLoading
+    ? "—"
+    : avgRedirectMs !== null
+      ? `${avgRedirectMs}ms`
+      : "—";
+
   const stats = [
     { label: "Total Clicks (Selected)", value: analyticsLoading ? "—" : totalClicks.toLocaleString(), icon: BarChart2, color: "text-primary" },
     { label: "Unique Visitors", value: analyticsLoading ? "—" : uniqueVisitors.toLocaleString(), icon: Globe, color: "text-blue-500" },
-    { label: "Avg. Click Time", value: analyticsLoading ? "—" : "< 50ms", icon: Clock, color: "text-green-500" },
+    { label: "Avg. Redirect Speed", value: avgRedirectDisplay, icon: Clock, color: "text-green-500" },
     { label: "Top Link", value: analyticsLoading ? "—" : topLink, icon: Target, color: "text-purple-500" },
   ];
 

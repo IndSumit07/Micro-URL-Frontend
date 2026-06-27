@@ -499,3 +499,176 @@ html.light .absolute.rotate-45 {
 html.light .fill-white {
   fill: var(--text-main) !important;
 }
+
+/* Fill primary color for logo triangle in footer */
+.fill-primary {
+  fill: var(--primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   HOMEPAGE SECTIONS — LIGHT THEME OVERRIDES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Section card backgrounds */
+html.light .bg-white\/\[0\.01\] {
+  background-color: rgba(248, 250, 252, 0.8) !important;
+}
+
+html.light .bg-white\/\[0\.02\] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.light .bg-white\/\[0\.04\] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light .bg-white\/\[0\.05\] {
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+
+html.light .hover\:bg-white\/\[0\.04\]:hover {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+html.light .hover\:bg-white\/\[0\.05\]:hover {
+  background-color: rgba(241, 245, 249, 1) !important;
+}
+
+/* Border overrides for section cards in light mode */
+html.light .border-white\/8,
+html.light .border-white\/\[0\.08\] {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* Section card hover border in light mode */
+html.light .hover\:border-white\/10:hover {
+  border-color: rgba(15, 23, 42, 0.15) !important;
+}
+
+html.light .hover\:border-white\/15:hover {
+  border-color: rgba(15, 23, 42, 0.2) !important;
+}
+
+/* FAQ button */
+html.light .hover\:bg-white\/\[0\.05\]:hover {
+  background-color: rgba(248, 250, 252, 1) !important;
+}
+
+/* Pricing highlight card in light mode */
+html.light .bg-primary\/5 {
+  background-color: rgba(255, 0, 51, 0.04) !important;
+}
+
+/* Toggle button in pricing */
+html.light .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Feature icon bg overrides */
+html.light .bg-white\/5:not(.hero-button) {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+
+html.light .border-white\/10:not(.hero-button) {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+html.light .border-white\/20 {
+  border-color: rgba(15, 23, 42, 0.15) !important;
+}
+
+/* Footer specific overrides */
+html.light footer {
+  border-top-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light footer .border-white\/5 {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light footer a:hover {
+  color: var(--text-main) !important;
+}
+
+/* Newsletter input in footer — light mode */
+html.light footer input[type="email"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: var(--text-main) !important;
+}
+
+html.light footer input[type="email"]::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+/* How it works step circles */
+html.light .bg-primary\/5 {
+  background-color: rgba(255, 0, 51, 0.04) !important;
+}
+
+/* Testimonial avatar border */
+html.light .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* Stat cards */
+html.light .hover\:bg-white\/\[0\.05\]:hover {
+  background-color: rgba(248, 250, 252, 1) !important;
+}
+
+/* Gradient backgrounds through background variable */
+html.light .from-background {
+  --tw-gradient-from: var(--background) !important;
+}
+
+/* CTA section */
+html.light .hover\:border-white\/25:hover {
+  border-color: rgba(15, 23, 42, 0.2) !important;
+}
+
+/* Outline buttons in light mode */
+html.light button.bg-white\/5 {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+  color: var(--text-main) !important;
+}
+
+html.light button.bg-white\/5:hover {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Tech stack marquee pills */
+html.light .bg-white\/\[0\.02\] {
+  background-color: rgba(255,255,255,0.9) !important;
+}
+
+/* Pricing feature check icon */
+html.light .bg-white\/10.text-white {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Italic testimonial text stays readable in light */
+html.light p.italic.text-muted {
+  color: var(--muted) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 0, 51, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 0, 51, 0.4);
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.15);
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.3);
+}

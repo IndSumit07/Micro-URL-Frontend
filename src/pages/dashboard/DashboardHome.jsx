@@ -19,7 +19,8 @@ const DashboardHome = () => {
   const totalCount = links.length;
   const recentLinks = links.slice(0, 8);
 
-  const totalClicks = analytics?.totalClicks || 0;
+  const totalClicks    = analytics?.totalClicks    || 0;
+  const avgRedirectMs  = analytics?.avgRedirectMs  ?? null;
   const timeSeries = analytics?.timeSeries || Array.from({ length: 7 }).map((_, i) => {
     const d = new Date();
     d.setDate(d.getDate() - (6 - i));
@@ -114,7 +115,13 @@ const DashboardHome = () => {
               </div>
               <div className="flex items-end space-x-2 relative z-10">
                 <span className="text-4xl font-semibold text-white tracking-tight">
-                  12ms
+                  {analyticsLoading ? (
+                    <div className="w-20 h-8 bg-white/10 rounded animate-pulse" />
+                  ) : avgRedirectMs !== null ? (
+                    `${avgRedirectMs}ms`
+                  ) : (
+                    '—'
+                  )}
                 </span>
               </div>
             </div>
